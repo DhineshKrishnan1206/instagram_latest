@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.userData['username']),
+        title: Text("Settings and activity"),
       ),
       body: Center(
         child: ElevatedButton(
