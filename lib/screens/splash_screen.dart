@@ -34,33 +34,27 @@ class _SplashScreenState extends State<SplashScreen> {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? username = prefs.getString('username');
       final String? email = prefs.getString('email');
-      if (username != null || email != null) {
+
+      if (username != null && email != null) {
+        // User is logged in
         Provider.of<UserProvider>(context, listen: false).userDetails = {
           'username': username,
           'email': email
         };
-      }
-      userData['username'] = username;
-      userData['email'] = email;
-      if (userData['usersname'] != "") {
-        print("has Values");
-        isLoggedIn = true;
-      }
-      if (isLoggedIn) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return BottomBar();
-        }));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BottomBar()),
+        );
       } else {
+        // User is not logged in
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return LoginScreen();
         }));
       }
-
-      print(userData['email']);
     } catch (e) {
       print(e);
+      // Handle error
     }
   }
 

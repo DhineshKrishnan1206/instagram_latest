@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/screens/bottomBar.dart';
 import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/signup_screen.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert'; // Import the dart:convert library
 import 'package:shared_preferences/shared_preferences.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -18,8 +20,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> loginUser() async {
     try {
-      Response response = await Dio().post("http://10.10.41.52:8000/auth/login",
-          data: {'username':emailController.text,'password':passwordController.text},
+      Response response = await Dio().post(
+        "http://10.10.41.52:8000/auth/login",
+        data: {
+          'username': emailController.text,
+          'password': passwordController.text
+        },
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -27,13 +33,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
       print(response);
-      userData=response.data;
+      userData = response.data;
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('username', userData[0]['username']);
       prefs.setString('email', userData[0]['email']);
       prefs.setString('password', userData[0]['password']);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-        return HomeScreen();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return BottomBar();
       }));
     } catch (e) {
       print(e);

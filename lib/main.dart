@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:instagram/providers/provider.dart';
+import 'package:instagram/screens/notFoundPage.dart';
 import 'package:instagram/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -38,8 +39,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.isDarkModeEnabled
-          ? ThemeData.dark()
-          : ThemeData.light(),
+          ? ThemeData.dark(useMaterial3: true).copyWith(
+              textTheme: Typography().white.apply(fontFamily: 'InstagramSans'))
+          : ThemeData.light(useMaterial3: true).copyWith(
+              textTheme: Typography().black.apply(fontFamily: 'InstagramSans')),
       home: SplashScreen(),
     );
   }
