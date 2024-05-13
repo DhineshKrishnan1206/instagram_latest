@@ -27,94 +27,159 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     Map<String, dynamic> userDetails =
         Provider.of<UserProvider>(context).userDetails;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(userDetails['username']),
-        actions: [
-          Container(
-            child: InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 30,
+        appBar: AppBar(
+          title: Text(
+            userDetails['username'],
+            style: TextStyle(
+                color: themeProvider.isDarkModeEnabled
+                    ? Colors.white
+                    : Colors.black),
+          ),
+          actions: [
+            Container(
+              child: InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Builder(builder: (context) {
+                        var themeProvider = Provider.of<ThemeProvider>(context);
+                        return Container(
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                "Create",
+                                style: TextStyle(
+                                    color: themeProvider.isDarkModeEnabled
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    String imageUrl =
+                                        postOptions.values.toList()[index];
+                                    String optionName =
+                                        postOptions.keys.toList()[index];
+                                    return ListTile(
+                                      leading: Image.asset(
+                                        imageUrl,
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                      title: InkWell(
+                                        onTap: () {
+                                          print(optionName);
+                                        },
+                                        child: Text(optionName),
+                                      ), // Changed title to Text widget
+                                    ); // Added comma here
+                                  },
+                                  itemCount: postOptions
+                                      .length, // Set itemCount to the length of your list
+                                ),
+                              ),
+                            ],
                           ),
-                          const Text(
-                            "Create",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemBuilder: (BuildContext context, int index) {
-                                String imageUrl =
-                                    postOptions.values.toList()[index];
-                                String optionName =
-                                    postOptions.keys.toList()[index];
-                                return ListTile(
-                                  leading: Image.asset(
-                                    imageUrl,
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                  title: InkWell(
-                                    onTap: () {
-                                      print(optionName);
-                                    },
-                                    child: Text(optionName),
-                                  ), // Changed title to Text widget
-                                ); // Added comma here
-                              },
-                              itemCount: postOptions
-                                  .length, // Set itemCount to the length of your list
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Image.asset(
-                "assets/icons/add.png",
-                height: 22,
-                width: 22,
+                        );
+                      });
+                    },
+                  );
+                },
+                child: Image.asset(
+                  "assets/icons/add.png",
+                  height: 22,
+                  width: 22,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SettingsScreen(
-                      userData: userDetails,
-                    );
-                  }));
-                },
-                child: const Icon(
-                  Icons.menu,
-                  size: 30,
-                )),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Text(userDetails['username']),
-      ),
-    );
+            const SizedBox(
+              width: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SettingsScreen(
+                        userData: userDetails,
+                      );
+                    }));
+                  },
+                  child: const Icon(
+                    Icons.menu,
+                    size: 30,
+                  )),
+            ),
+          ],
+        ),
+        body: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CircleAvatar(
+                  radius: 35,
+                  backgroundColor: Color(0xFF505050),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "73",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text("posts")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "593",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text("followers")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "939",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text("following")
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 0, left: 30),
+              child: Column(
+                children: [Text("Dhinesh")],
+              ),
+            )
+          ],
+        ));
   }
 }

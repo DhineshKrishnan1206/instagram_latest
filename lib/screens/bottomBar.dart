@@ -4,6 +4,8 @@ import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/profile_screen.dart';
 import 'package:instagram/screens/reel_screen.dart';
 import 'package:instagram/screens/search_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:instagram/providers/provider.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -23,6 +25,7 @@ class _BottomBarState extends State<BottomBar> {
   ];
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -37,20 +40,52 @@ class _BottomBarState extends State<BottomBar> {
               },
           type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
             BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/search.png',
-                    width: 20, height: 20),
+                icon: Icon(
+                  Icons.home,
+                  color: themeProvider.isDarkModeEnabled
+                      ? Colors.white
+                      : Colors.black,
+                ),
                 label: ""),
             BottomNavigationBarItem(
-                icon:
-                    Image.asset('assets/icons/add.png', width: 20, height: 20),
+                icon: Image.asset(
+                  'assets/icons/search.png',
+                  width: 20,
+                  height: 20,
+                  color: themeProvider.isDarkModeEnabled
+                      ? Colors.white
+                      : Colors.black,
+                ),
                 label: ""),
             BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/video.png',
-                    width: 20, height: 20),
+                icon: Image.asset(
+                  'assets/icons/add.png',
+                  width: 20,
+                  height: 20,
+                  color: themeProvider.isDarkModeEnabled
+                      ? Colors.white
+                      : Colors.black,
+                ),
                 label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "")
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/icons/video.png',
+                  width: 20,
+                  height: 20,
+                  color: themeProvider.isDarkModeEnabled
+                      ? Colors.white
+                      : Colors.black,
+                ),
+                label: ""),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
+                  color: themeProvider.isDarkModeEnabled
+                      ? Colors.white
+                      : Colors.black,
+                ),
+                label: "")
           ]),
     );
   }
