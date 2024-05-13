@@ -128,55 +128,96 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        body: const Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CircleAvatar(
-                  radius: 35,
-                  backgroundColor: Color(0xFF505050),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "73",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text("posts")
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "593",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text("followers")
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "939",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text("following")
-                  ],
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.only(left: 15, right: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xFF505050),
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "73",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      Text("posts")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "593",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      Text("followers")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "939",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      Text("following")
+                    ],
+                  )
+                ],
+              ),
             ),
             SizedBox(
-              height: 20,
+              height: 5,
             ),
             Padding(
-              padding: EdgeInsets.only(top: 0, left: 30),
+              padding: EdgeInsets.only(top: 0, left: 15),
               child: Column(
-                children: [Text("Dhinesh")],
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dhinesh",
+                    style: TextStyle(
+                        fontFamily: 'Instagram', fontStyle: FontStyle.italic),
+                  ),
+                  Text("Artist"),
+                  Text(
+                    "Introvert",
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text("Musician | Editor"),
+                  Row(
+                    children: [
+                      Icon(Icons.link),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("youtube.com/@DhineshKrishnan")
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    width: 380,
+                    height: 40,
+                    color: Colors.black,
+                    child: Column(
+                      children: [Text("Professional Dashboard")],
+                    ),
+                  )
+                ],
               ),
             )
           ],
