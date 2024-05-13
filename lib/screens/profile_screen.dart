@@ -210,11 +210,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 5,
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.black,
+                    ),
                     width: 380,
                     height: 40,
-                    color: Colors.black,
                     child: Column(
-                      children: [Text("Professional Dashboard")],
+                      children: [
+                        Text(
+                          "Professional Dashboard",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
                     ),
                   )
                 ],
